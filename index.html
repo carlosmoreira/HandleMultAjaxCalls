@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <title>Multiple Ajax Calls</title>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+
+<body>
+    <script>
+    $(document).ready(function() {
+        var ajaxCalls = [];
+
+        for (var i = 0; i < 5; i++) {
+
+            var ajaxCall = $.ajax({
+                url: 'load.php'
+            }).done(function(data){
+            	$('body').append('<p>'  + data + '</p>');
+            });
+
+            ajaxCalls.push(ajaxCall);
+        }
+
+        $.when.apply(null, ajaxCalls).done(function(data){
+        	$('body').append('<p>FINISHED</p>');
+        });
+        
+
+
+
+
+    });
+    </script>
+</body>
+
+</html>
